@@ -1,0 +1,48 @@
+# Secrets：API Key / 憑證一律不入庫（CLAUDE.md NEVER #7、AGENTS.md §11）
+.env
+.env.*
+!.env.example
+!tools/backup/.env.restic.example
+
+# 原始素材（含付費課程／Notion 匯出／個人 journal）：永不入庫
+# /raw/ 內容預設 ignore；用 /raw/* 而非 /raw/ 方可在子層做 negation
+# （git 規則：父目錄被 ignore 時，子層 ! 無效）
+/raw/*
+# 例外：raw/retrospective/ 為 Claude Code agent-output 專屬子夾，作為知識閉環
+# 迴路入口（design.md US-006），需追蹤；其餘 raw/ 維持唯讀且不入 git
+!/raw/retrospective/
+
+# Obsidian 本機快取（每次開啟就變動，跨機不共用）
+# 用 **/ 前綴讓巢狀 vault（如 wiki/.obsidian/）也生效
+**/.obsidian/workspace*.json
+**/.obsidian/cache/
+**/.obsidian/plugins/*/data.json
+.trash/
+
+# macOS
+.DS_Store
+
+# restic 備份憑證
+.env.restic
+
+# Python 虛擬環境：不應入庫（含 playwright Node binary 117MB 等大檔）
+/.venv-scraper/
+/.venv/
+/venv/
+__pycache__/
+*.pyc
+
+# graphify 快取（hash 命名，可重新產生）
+/graphify-out/cache/
+# graphify pipeline 中間產物（每次 run 重生；persistent 的 graph.json / graph.html / GRAPH_REPORT.md 仍追蹤）
+/graphify-out/.graphify_*.json
+/graphify-out/.graphify_python
+/graphify-out/.graphify_chunk_*.json
+/graphify-out/.needs_update
+/graphify-out/memory/
+tools/loop/.cost_ledger.jsonl
+
+# geo 匯出產物：生成物不入庫（避免 repo 漸肥，geo_index.json 1.6MB / kmz 638KB 等）
+# 工具在 tools/、計畫在 .claude/plans/ 仍追蹤；產物本地重生即可
+export/sundaytour/
+export/sundaytour-countries/

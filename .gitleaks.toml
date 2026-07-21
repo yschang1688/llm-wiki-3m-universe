@@ -1,0 +1,11 @@
+# gitleaks config — 沿用內建規則，僅加 raw/ 路徑白名單
+# raw/ 是 web_scraper.py / 課程匯入抓回的第三方內容，pattern 命中皆為雜訊
+# （商品 SKU、課程 asset ID、JWT 教學範例 key）
+[extend]
+useDefault = true
+
+[allowlist]
+description = "raw/ 第三方原始素材，排除 secret 掃描"
+paths = [
+  '''^raw/''',
+]
