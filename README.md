@@ -2,7 +2,7 @@
 
 > 一套**多 Agent 協作的知識治理系統**——不是筆記合集，而是把「AI 編譯知識」這件事本身當成工程問題來設計：任務分級、職責邊界、規格仲裁、朔源協定，全部可稽核、可重現。
 >
-> 本 repo 是私人知識庫 [AI_LLM_Wiki](.) 的公開精選子集：51 篇 LLM／深度學習技術條目 + 完整治理框架。
+> 本 repo 是私人知識庫 [AI_LLM_Wiki](.) 的公開精選子集：59 篇 LLM／深度學習技術條目 + 完整治理框架。
 
 ---
 
@@ -20,7 +20,7 @@
 | **MUS**（Muse） | 語意連結與分流 | 建立條目間 `[[wikilink]]`、偵測孤兒頁 | 知識圖譜 |
 | **MET**（Metis） | 策略與品質治理 | 規格仲裁、進度追蹤、風險登記 | `openspec/**` |
 
-三者對應到具體 AI Agent（Claude Code 規劃／執行 Agent 落地／研究 Agent 蒐集），詳細分工邊界見 [`CLAUDE.md`](CLAUDE.md) 與 [`AGENTS.md`](AGENTS.md)。
+三者對應到具體 AI Agent（Claude Code 規劃／執行 Agent 落地／研究 Agent 蒐集），詳細分工邊界見 [`CLAUDE.md`](CLAUDE.md) 與 [`AGENTS.md`](AGENTS.md)；三神祇的產品敘事與角色隱喻設計見 [`openspec/knowledge-universe/pantheon-pkm.md`](openspec/knowledge-universe/pantheon-pkm.md)。
 
 ## 治理機制（這是重點，不是內容本身）
 
@@ -40,7 +40,7 @@
 python3 tools/lint_wiki.py .          # 全 pass 掃描 + 報告
 ```
 
-## 內容樣本：51 篇 LLM／深度學習技術條目
+## 內容樣本：59 篇 LLM／深度學習技術條目
 
 每篇採用「Wikipedia 式」v3 骨架——TL;DR、Infobox（類別/難度/父子頁關係）、分章節細節、相關概念互連——而非流水帳筆記。完整索引見 [`index.md`](index.md)，涵蓋：
 
@@ -51,6 +51,7 @@ python3 tools/lint_wiki.py .          # 全 pass 掃描 + 報告
 - **神經網路基礎**（4 篇）：CNN、RNN、GNN、知識蒸餾
 - **生成式／擴散／多模態**（4 篇）：擴散模型、LDM、多模態 AI
 - **Agent／工程／評測**（7 篇）：AI Agent 機制、MCP 協議、Context Engineering、評測陷阱
+- **核心父頁與基礎概念**（8 篇）：大語言模型、深度學習、提示工程、生成式AI、規模定律等，補齊圖譜連結完整度
 
 ## 技術堆疊
 
@@ -60,9 +61,9 @@ Python 3.12（stdlib）· Obsidian（wikilink 渲染）· Markdown + YAML frontm
 
 ```
 CLAUDE.md / AGENTS.md      多 Agent 協作全域規則（唯一權威入口）
-openspec/knowledge-universe/  規格三件組（requirements/design/tasks）
+openspec/knowledge-universe/  規格三件組（requirements/design/tasks）+ pantheon-pkm.md（三神祇產品敘事）
 tools/lint_wiki.py         品質把關自動化
-wiki/*.md                  51 篇精選技術條目（v3 骨架）
+wiki/*.md                  59 篇精選技術條目（v3 骨架）
 index.md                   分類索引
 ```
 
