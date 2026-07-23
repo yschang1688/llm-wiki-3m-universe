@@ -1,5 +1,7 @@
 # LLM Wiki · 3M Universe（知識宇宙）
 
+**A multi-agent knowledge governance system** — treating AI-compiled knowledge as an engineering problem: task tiering (L0–L3), handoff protocols, spec arbitration, and full auditability. This public repo is a curated subset of a 1,333-entry personal knowledge base: the complete governance framework plus 59 sample entries on LLM / deep learning. Content is in Traditional Chinese; the governance design speaks for itself.
+
 > **多 Agent 協作的知識治理系統**——不是筆記合集，而是把「AI 編譯知識」當成工程問題來治理：任務分級、交接留痕、規格仲裁，全程可稽核、可重現。
 
 **完整系統：1,333 條目 · 知識圖譜 1,331 節點 · 3 個 AI Agent 分工協作**
