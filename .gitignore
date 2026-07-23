@@ -4,7 +4,7 @@
 !.env.example
 !tools/backup/.env.restic.example
 
-# 原始素材（含付費課程／Notion 匯出／個人 journal）：永不入庫
+# 原始素材（第三方筆記／Notion 匯出等）：永不入庫
 # /raw/ 內容預設 ignore；用 /raw/* 而非 /raw/ 方可在子層做 negation
 # （git 規則：父目錄被 ignore 時，子層 ! 無效）
 /raw/*
@@ -25,9 +25,8 @@
 # restic 備份憑證
 .env.restic
 
-# Python 虛擬環境：不應入庫（含 playwright Node binary 117MB 等大檔）
-/.venv-scraper/
-/.venv/
+# Python 虛擬環境：不應入庫
+/.venv*/
 /venv/
 __pycache__/
 *.pyc

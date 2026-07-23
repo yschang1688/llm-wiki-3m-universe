@@ -64,11 +64,11 @@ ChatGPT 真正做的事情是根據過去的對話歷史，輸出下一個詞彙
 ## 延伸閱讀
 
 - `raw/web/【2023 生成式AI】01~03 ChatGPT 原理剖析 - HackMD.md`
-- 李宏毅課程影片：[ChatGPT 原理剖析](https://youtu.be/yiY4nPOzJEg)
+- 李宏毅影片：[ChatGPT 原理剖析](https://youtu.be/yiY4nPOzJEg)
 
 ## 修訂歷史
 
-- 2026-05-04：新建 v3 條目（編譯自 2023 李宏毅課程）
+- 2026-05-04：新建 v3 條目（編譯自 2023 李宏毅筆記）
 
 ---
 來源：`raw/web/【2023 生成式AI】01~03 ChatGPT 原理剖析 - HackMD.md`

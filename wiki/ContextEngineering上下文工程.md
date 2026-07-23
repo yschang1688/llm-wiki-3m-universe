@@ -36,7 +36,7 @@ flowchart TB
 
 ### 來源摘記
 
-footer 所列 `raw/web/AI Agent (13)：核心技術 Context Engineering 基本概念解說 - HackMD.md` 與 `raw/web/[生成式人工智慧與機器學習導論2025】02 Context Engineering - HackMD.md` 共構「無 CE 拼接 vs 有 CE 更新」與 Agent 守門人角色—對應本頁三條重點與架構地圖迴圈。與 [[李宏毅2025上下文工程導論要旨]]、[[AI協作三階段Prompt知識庫Agent]] 併讀可接到課程化定義與產品化 Lv3。
+footer 所列 `raw/web/AI Agent (13)：核心技術 Context Engineering 基本概念解說 - HackMD.md` 與 `raw/web/[生成式人工智慧與機器學習導論2025】02 Context Engineering - HackMD.md` 共構「無 CE 拼接 vs 有 CE 更新」與 Agent 守門人角色—對應本頁三條重點與架構地圖迴圈。與 [[李宏毅2025上下文工程導論要旨]]、[[AI協作三階段Prompt知識庫Agent]] 併讀可接到系統化定義與產品化 Lv3。
 
 - 與 [[AI協作三階段Prompt知識庫Agent]] 的 Lv3 對齊：從產品敘事落到「可實作的上下文狀態機」。
 

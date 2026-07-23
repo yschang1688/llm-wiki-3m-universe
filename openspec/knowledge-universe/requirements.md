@@ -33,7 +33,7 @@
 
 ## US-003：雙路徑擷取與整合（Integration）
 
-**As a** 維護知識庫的使用者，**I want** 既能從 **AISpider 服務** 進料，也能在 Vault 內執行 **web_scraper**，**so that** 排程／遠端爬取與本機補抓可並存且不互踩。
+**As a** 維護知識庫的使用者，**I want** 既能從 **AISpider 服務** 進料，也能在 Vault 內執行 **web_scraper**，**so that** 排程／遠端擷取與本機補抓可並存且不互踩。
 
 ### 驗收標準
 

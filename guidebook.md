@@ -32,49 +32,7 @@
 
 詳見 `tools/notebooklm_export.md`。
 
-### 網站批次爬蟲
-
-用 `tools/web_scraper.py` 批次抓取常讀網站，自動轉成 .md：
-
-```bash
-# 單一網頁
-python3 tools/web_scraper.py https://example.com/article
-
-# 從網址列表批次抓取
-python3 tools/web_scraper.py --file tools/urls_example.txt
-
-# 爬取整個部落格（深度 2 層）
-python3 tools/web_scraper.py --crawl https://blog.example.com --depth 2
-
-# 指定子資料夾分類
-python3 tools/web_scraper.py -s "AI技術" https://example.com/ai-article
-```
-
-抓取的檔案會自動存入 `raw/web/`，之後說「整理」即可編譯進知識庫。
-
-編輯 `tools/urls_example.txt` 可以管理你的常讀網站列表。
-
-**結構化課程輸出（`raw/class/`）**：同一支程式支援 **Koob 線上課**與 **大人學 darencademy** 列表／單課頁，產出分段 `.md`、manifest、選用音訊；圖以 `[圖：alt]` 表示。建議用專案內 venv：`.venv-scraper/bin/python`（依賴見 `requirements-scraper.txt`）。
-
-```bash
-# 大人學：列表第 2～4 頁合併、輸出到 raw/class（略過已存在 darencademy_manifest 的課）
-.venv-scraper/bin/python tools/web_scraper.py \
-  --darencademy-index 'https://www.darencademy.com/course/index/page/2' \
-  --darencademy-index-page-to 4 -o raw/class
-
-# 大人學：只補「其他.md」（不覆寫其他分段、不更新總表）
-.venv-scraper/bin/python tools/web_scraper.py \
-  --darencademy-index 'https://www.darencademy.com/course/index/page/1' \
-  --darencademy-max-courses 15 --darencademy-other-only -o raw/class
-
-# Koob：線上課列表批次（略過已爬 slug）
-.venv-scraper/bin/python tools/web_scraper.py \
-  --koob-online-index 'https://www.koob.com.tw/online' -o raw/class
-```
-
-站方 HTML 版型會變，分段與列表連結曾做過多輪修正（表頭掃描、同段「預告＋實際效益」拆分、多頁去重、`listing_urls` 等）；細節見 **`CLAUDE.md`**「工具補充」與 **`log.md`**。
-
-**Pipeline 規格（OpenSpec）**：多來源落地、metadata 與 AISpider 介面說明見 [`openspec/knowledge-universe/README.md`](openspec/knowledge-universe/README.md)；`raw/` 進料 YAML 範本見 [`openspec/knowledge-universe/templates/`](openspec/knowledge-universe/templates/)。
+**Pipeline 規格（OpenSpec）**：多來源落地與 metadata 慣例見 [`openspec/knowledge-universe/README.md`](openspec/knowledge-universe/README.md)；`raw/` 進料 YAML 範本見 [`openspec/knowledge-universe/templates/`](openspec/knowledge-universe/templates/)。
 
 ---
 
