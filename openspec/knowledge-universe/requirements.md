@@ -13,7 +13,7 @@
 
 - [ ] AC-1：新進檔案落地於 `raw/<source>/` 並含最小 metadata：`source_type`、`source_id`、`canonical_url`、`retrieved_at`、`ingest_path`（`license_notes` 策略見 `design.md`）。
 - [ ] AC-2：同一 `source_type + source_id` 重跑不覆寫舊檔，需保留歷史版本（後綴／hash 規則見 `design.md` §3.3）。
-- [ ] AC-3：`web_scraper-cli` 與 `aispider-service` 對同來源資料可並存且可區分（`ingest_path`）。
+- [ ] AC-3：`ingest-cli` 與 `ingest-service` 對同來源資料可並存且可區分（`ingest_path`）。
 - [ ] AC-4：來源讀取失敗需有可觀測紀錄（錯誤原因與時間；日誌或 `_errors` 約定見實作階段）。
 
 ---
@@ -33,13 +33,13 @@
 
 ## US-003：雙路徑擷取與整合（Integration）
 
-**As a** 維護知識庫的使用者，**I want** 既能從 **AISpider 服務** 進料，也能在 Vault 內執行 **web_scraper**，**so that** 排程／遠端擷取與本機補抓可並存且不互踩。
+**As a** 維護知識庫的使用者，**I want** 既能從 **ingest-service** 進料，也能在 Vault 內執行 **ingest-cli**，**so that** 排程／遠端擷取與本機補抓可並存且不互踩。
 
 ### 驗收標準
 
 - [ ] AC-1：`design.md` 明確描述兩種路徑的輸入、輸出路徑與觸發方式（API／掛載／CLI）。
 - [ ] AC-2：同一 URL／同一 `source_id` 重複進料時，去重策略已文件化且可驗證。
-- [ ] AC-3：`web_scraper` 預設輸出 `raw/web/` 與 AISpider 落地之 **metadata 欄位**對齊（至少 `source_type`、`source_id`、`retrieved_at`、`canonical_url`）。
+- [ ] AC-3：`ingest-cli` 預設輸出 `raw/web/` 與 ingest-service 落地之 **metadata 欄位**對齊（至少 `source_type`、`source_id`、`retrieved_at`、`canonical_url`）。
 
 ---
 
@@ -141,7 +141,7 @@
 
 | US | 主題 | design 對照（章節） |
 |----|------|---------------------|
-| US-001 | 多來源 raw | §3 Raw 合約、§4 AISpider |
+| US-001 | 多來源 raw | §3 Raw 合約、§4 ingest-service |
 | US-002 | 編譯／wiki | §6、§9、`CLAUDE.md` |
 | US-003 | 雙路徑 | §1、§4、§5 |
 | US-004 | Muse | §11、§12、`stages.md` Stage 2 |

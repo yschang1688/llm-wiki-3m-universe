@@ -25,7 +25,7 @@
 | Step 2 | Muse | 靈感／洞見 | **AI_Insight** | 跨界聯想、創意生成（Cross-pollination） | 洞見提案（Insight） |
 | Step 3 | Metis | 策略／落地 | **AI_Strategy** | 風險評估、執行路徑規劃與 OKR 拆解 | 策略地圖（Action Plan） |
 
-**Pipeline 合約補充（與 design 一致）：** 雙路徑擷取（AISpider 服務 + `tools/web_scraper`）→ `raw/` → 依 CLAUDE「整理」→ `wiki/`；可視化為 Vault SoT + 可選 Web 儀表板匯出。
+**Pipeline 合約補充（與 design 一致）：** 雙路徑擷取（ingest-service + `tools/ingest-cli`）→ `raw/` → 依 CLAUDE「整理」→ `wiki/`；可視化為 Vault SoT + 可選 Web 儀表板匯出。
 
 ---
 

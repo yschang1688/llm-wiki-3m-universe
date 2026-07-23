@@ -2,7 +2,7 @@
 
 **規格版本：** [`SPEC_VERSION.md`](SPEC_VERSION.md) · **v1.0-baseline**（凍結後續任務對照此版，避免漂移）
 
-本目錄為 **AISpider × AI_LLM_Wiki** 的規格文件（OpenSpec），建議閱讀順序：
+本目錄為 **ingest-service × AI_LLM_Wiki** 的規格文件（OpenSpec），建議閱讀順序：
 
 1. [`SPEC_VERSION.md`](SPEC_VERSION.md) — 版本與權威 trio 索引  
 2. [`gate-checklist.md`](gate-checklist.md) — **Gate A / B** 獨立勾選表  
@@ -24,10 +24,10 @@
 
 **Agent 協作合約：** [`references/agent-collaboration-map.md`](references/agent-collaboration-map.md) — 三神祇 × 三 Agent × 五動作映射、檔案寫入權矩陣、三大指標掛鉤（2026-07-05 新增）
 
-**Mnemosyne 執行參考：** [metadata-validation.md](metadata-validation.md) · [web-scraper-design-alignment.md](web-scraper-design-alignment.md) · [aispider-contract-status.md](aispider-contract-status.md) · [ingest-traceability.md](ingest-traceability.md) · [gate-a-evidence-pack.md](gate-a-evidence-pack.md) · [notion-ingest-conventions.md](notion-ingest-conventions.md) · [gdrive-youtube-poc.md](gdrive-youtube-poc.md) · [index-md-conventions.md](index-md-conventions.md)
+**Mnemosyne 執行參考：** [metadata-validation.md](metadata-validation.md) · [ingest-cli-design-alignment.md](ingest-cli-design-alignment.md) · [ingest-service-contract-status.md](ingest-service-contract-status.md) · [ingest-traceability.md](ingest-traceability.md) · [gate-a-evidence-pack.md](gate-a-evidence-pack.md) · [notion-ingest-conventions.md](notion-ingest-conventions.md) · [gdrive-youtube-poc.md](gdrive-youtube-poc.md) · [index-md-conventions.md](index-md-conventions.md)
 
-**補充：** [templates/](templates/) · [AISPIDER_ISSUE_DRAFT.md](AISPIDER_ISSUE_DRAFT.md) · [INTEGRATION_TEST_WEB.md](INTEGRATION_TEST_WEB.md)
+**補充：** [templates/](templates/) · [INGEST_SERVICE_ISSUE_DRAFT.md](INGEST_SERVICE_ISSUE_DRAFT.md) · [INTEGRATION_TEST_WEB.md](INTEGRATION_TEST_WEB.md)
 
-**AISpider 本機路徑（使用者提供）：** `<external-repo-path>`
+**ingest-service 本機路徑（使用者提供）：** `<external-repo-path>`
 
 最後更新：2026-04-14（+Muse 並行試跑路線圖）

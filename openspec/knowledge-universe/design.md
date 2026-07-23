@@ -1,7 +1,7 @@
 # Design — 知識宇宙 Pipeline
 
 > **OpenSpec SDD · v1.0-baseline**（凍結見 [`SPEC_VERSION.md`](SPEC_VERSION.md））  
-> 架構、資料合約、AISpider 與 web_scraper 雙路徑、安全、**現狀 vs 目標**、LLM 路由與 Gate 索引。
+> 架構、資料合約、ingest-service 與 ingest-cli 雙路徑、安全、**現狀 vs 目標**、LLM 路由與 Gate 索引。
 
 ## 1. 系統情境
 
@@ -14,12 +14,12 @@ flowchart TB
     D[Google_Drive]
     Y[YouTube]
   end
-  subgraph aispider_repo [AISpider_repo]
+  subgraph ingest_service_repo [Ingest_service_repo]
     Svc[Crawler_Service]
     Gfy[graphify_optional]
   end
   subgraph wiki_vault [AI_LLM_Wiki_Vault]
-    WS[tools_web_scraper]
+    WS[tools_ingest_cli]
     Raw[raw_landing]
     Cmp[LLM_Compiler]
     Wiki[wiki]
@@ -43,8 +43,8 @@ flowchart TB
 
 **路徑說明（問卷）：**
 
-- **AISpider**（獨立 Repo，路徑：`<external-repo-path>`）：多連接器、可排程；可選使用 Repo 內 **`graphify`**（`detect → … → export` 管線見該專案 `ARCHITECTURE.md`）產出 `graph.json`／HTML 等，供 Web 儀表板使用。
-- **web_scraper**：Vault [`tools/web_scraper.py`](../../tools/web_scraper.py)，本機 CLI，預設 **`raw/web/`**。
+- **ingest-service**（獨立 Repo，路徑：`<external-repo-path>`）：多連接器、可排程；可選使用 Repo 內 **`graphify`**（`detect → … → export` 管線見該專案 `ARCHITECTURE.md`）產出 `graph.json`／HTML 等，供 Web 儀表板使用。
+- **ingest-cli**：Vault [`tools/ingest_cli.py`](../../tools/ingest_cli.py)，本機 CLI，預設 **`raw/web/`**。
 
 兩者皆 **只寫 raw**，不直接改 `wiki/`；語意編譯仍依 [`CLAUDE.md`](../../CLAUDE.md)（「整理」）。
 
@@ -70,7 +70,7 @@ flowchart TB
 
 | `source_type` | 建議路徑 | 備註 |
 |---------------|----------|------|
-| web | `raw/web/` | 與 `web_scraper` 預設一致 |
+| web | `raw/web/` | 與 `ingest-cli` 預設一致 |
 | notebooklm | `raw/notebooklm/` | 已存在 |
 | notion | `raw/Notion/…` | 已存在巢狀目錄 |
 | gdrive | `raw/gdrive/` | 實作階段建立 |
@@ -86,29 +86,29 @@ source_type: web | notebooklm | notion | gdrive | youtube | journal | wellness
 source_id: "<unique-per-origin>"
 canonical_url: "<https://...>"
 retrieved_at: "2026-04-10T12:00:00+08:00"
-ingest_path: "aispider-service | web_scraper-cli | manual-vault"
+ingest_path: "ingest-service | ingest-cli | manual-vault"
 license_notes: "personal-archive"
 ---
 ```
 
-- **ingest_path** 用於區分 **AISpider 服務**、**web_scraper** 與手動落地，便於除錯與去重。
+- **ingest_path** 用於區分 **ingest-service**、**ingest-cli** 與手動落地，便於除錯與去重。
 
 ### 3.3 去重策略（預設）
 
 - 以 **`source_type` + `source_id`**（或 `canonical_url` 正規化）為鍵。
 - 若同鍵再進料：**新檔名加日期或短 hash 後綴**，並在 `log.md` 整理記錄中註明「同來源更新」；**不**刪除舊 raw。
 
-## 4. AISpider 與 Wiki 的介面（設計預留）
+## 4. ingest-service 與 Wiki 的介面（設計預留）
 
 | 機制 | 用途 | 備註 |
 |------|------|------|
 | **HTTP API**（可選） | Wiki 或自動化觸發「抓取任務」 | 需認證、請求體含 `target`、回傳 job id 或落地路徑 |
-| **共用檔案系統／掛載** | AISpider 直接寫入 Vault 的 `raw/` | 同機開發最簡；注意權限 |
+| **共用檔案系統／掛載** | ingest-service 直接寫入 Vault 的 `raw/` | 同機開發最簡；注意權限 |
 | **Artifact bundle** | 服務寫入暫存目錄，再由腳本移入 `raw/` | 適合 CI |
 
-**AISpider 路徑：** `<external-repo-path>`（本機）；CI／其他機器以環境變數覆寫。
+**ingest-service 路徑：** `<external-repo-path>`（本機）；CI／其他機器以環境變數覆寫。
 
-## 5. web_scraper（現狀對齊）
+## 5. ingest-cli（現狀對齊）
 
 - **行為摘要**：`trafilatura` → `readability-lxml` → 啟發式；`markdownify` 轉 Markdown；預設輸出目錄見腳本內 `DEFAULT_OUTPUT`（指向 `raw/web`）。
 - **已對齊項目**（2026-04-10）：
@@ -127,7 +127,7 @@ license_notes: "personal-archive"
 ## 7. 混合可視化（匯出管線）
 
 - **Obsidian**：既有 Graph、`[[wikilink]]`、`index.md`，作為**編輯時的即時感**（Mnemosyne 動作一）。
-- **Web 儀表板**：從 `wiki/` 解析連結與／或依賴 **graphify**（位於 AISpider 路徑下）產出 `graph.json`、`graph.html` 等；匯出目錄預設 **`export/web-dashboard/`**（見 `tasks.md` Phase 4），作為**回顧與分享時的全景**。
+- **Web 儀表板**：從 `wiki/` 解析連結與／或依賴 **graphify**（位於 ingest-service 路徑下）產出 `graph.json`、`graph.html` 等；匯出目錄預設 **`export/web-dashboard/`**（見 `tasks.md` Phase 4），作為**回顧與分享時的全景**。
 
 ### 7.1 三層疊圖（Three-Layer Overlay）
 
@@ -160,22 +160,22 @@ linked_action_plan: 2026-05-01-batch-01/...         # 反向溯源至 audit/acti
 
 | 項目 | 現狀 | 目標 |
 |------|------|------|
-| AISpider 整合 | 獨立 Repo 存在；Vault 未綁定正式 API 文件 | `requirements`／本 design 作為合約基線；實作 API 或掛載 |
-| web_scraper | 可用；已支援 YAML、主標+來源站點、噪音裁切 | 與 AISpider 維持欄位與去重鍵一致；站點特化規則持續擴充 |
+| ingest-service 整合 | 獨立 Repo 存在；Vault 未綁定正式 API 文件 | `requirements`／本 design 作為合約基線；實作 API 或掛載 |
+| ingest-cli | 可用；已支援 YAML、主標+來源站點、噪音裁切 | 與 ingest-service 維持欄位與去重鍵一致；站點特化規則持續擴充 |
 | raw 分桶 | `notebooklm`、`Notion`、`web` 等已使用 | 補齊 `gdrive`、`youtube`；`journal`／`wellness` 已預留 |
 | 編譯 | CLAUDE「整理」流程 | 不變；與多來源 `log` 溯源一致 |
 | 可視化 | Obsidian 為主 | **+ 定期匯出 Web 儀表板**（單向 SoT） |
 
-### 9.1 文件對照（guidebook／CLAUDE／web_scraper）
+### 9.1 文件對照（guidebook／CLAUDE／ingest-cli）
 
 - **guidebook**：使用者操作路徑（蒐集→整理→提問→清理），並連結 OpenSpec。
 - **CLAUDE**：維持 `raw/` 唯讀進料、`wiki/` 編譯、`index.md`／`log.md` 更新原則。
-- **web_scraper**：本機擷取實作，落地 metadata 合約與品質策略。
+- **ingest-cli**：本機擷取實作，落地 metadata 合約與品質策略。
 
 ## 10. 相關路徑索引
 
 - Vault 根：`<vault-root-path>`
-- AISpider：`<external-repo-path>`
+- ingest-service：`<external-repo-path>`
 - graphify 架構：`<external-repo-path>/graphify/ARCHITECTURE.md`
 
 ## 11. 三神祇 Pantheon PKM：與本設計的對標
@@ -186,7 +186,7 @@ linked_action_plan: 2026-05-01-batch-01/...         # 反向溯源至 audit/acti
 
 | 模組 | 產物 | 本 repo 現狀 | 後續／外部 |
 |------|------|----------------|------------|
-| **Mnemosyne** | Personal Wiki、`index`/`log`、基礎 `[[wikilink]]` | `raw/` 雙路徑、`wiki/` 編譯、CLAUDE「整理」、web_scraper／AISpider 合約 §3～§5 | 目錄與 metadata 擴充見 `tasks.md` |
+| **Mnemosyne** | Personal Wiki、`index`/`log`、基礎 `[[wikilink]]` | `raw/` 雙路徑、`wiki/` 編譯、CLAUDE「整理」、ingest-cli／ingest-service 合約 §3～§5 | 目錄與 metadata 擴充見 `tasks.md` |
 | **Muse** | Insight 提案、語義碰撞、三層漫遊、孤兒配對 | 規格與 DoD 在 `stages.md` Stage 2；圖譜可視 §7 + graphify 可選 | `AI_Insight`：LLM 與圖遍歷腳本 |
 | **Metis** | Action Plan、OKR/WBS、KPI、紅隊、wellness 報告 | `metis-action-plan-spec.md`、`mvp-acceptance.md` | `AI_Strategy`：專案模板與儀表板 |
 

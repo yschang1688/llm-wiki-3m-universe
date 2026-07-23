@@ -33,8 +33,8 @@
 - [x] **T-0015**：新增 [`commands/wiki-import.md`](commands/wiki-import.md) + [`tools/wiki-import.sh`](../../tools/wiki-import.sh)（`/wiki-import` 最小閉環）
 - [x] **T-0016**：新增 [`phase1-ac.md`](phase1-ac.md) 並執行**第一輪**勾選
 - [x] **T-0017**：實作或文件化 **metadata 抽樣檢核**（N=20，一致率計算方式）— [`tools/validate_raw_frontmatter.py`](../../tools/validate_raw_frontmatter.py)、[`metadata-validation.md`](metadata-validation.md)
-- [x] **T-0018**：`web_scraper` 與 `design` §5 持續對齊（欄位／主標 C／噪音裁切）— [`web-scraper-design-alignment.md`](web-scraper-design-alignment.md)
-- [x] **T-0019**：AISpider 寫入契約落地追蹤（`ingest_path=aispider-service`）— [`aispider-contract-status.md`](aispider-contract-status.md)（實作仍待 AISpider Repo）
+- [x] **T-0018**：`ingest-cli` 與 `design` §5 持續對齊（欄位／主標 C／噪音裁切）— [`ingest-cli-design-alignment.md`](ingest-cli-design-alignment.md)
+- [x] **T-0019**：ingest-service 寫入契約落地追蹤（`ingest_path=ingest-service`）— [`ingest-service-contract-status.md`](ingest-service-contract-status.md)（實作仍待 ingest-service Repo）
 - [x] **T-0020**：雙路徑去重手動／半自動驗收 — [`INTEGRATION_TEST_WEB.md`](INTEGRATION_TEST_WEB.md) §B 已補第二路徑步驟
 - [x] **T-0021**：NotebookLM 批次與 `raw/notebooklm/` 命名策略一致化 — [`raw/notebooklm/README.md`](../../raw/notebooklm/README.md)
 - [x] **T-0022**：Notion 匯出路徑與 page id 規則抽樣驗證 — [`notion-ingest-conventions.md`](notion-ingest-conventions.md)
