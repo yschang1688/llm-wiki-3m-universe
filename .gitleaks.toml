@@ -1,10 +1,3 @@
-# gitleaks config — 沿用內建規則，僅加 raw/ 路徑白名單
-# raw/ 為第三方原始素材，pattern 命中皆為雜訊（asset ID、JWT 教學範例 key）
+# gitleaks config — 沿用內建規則，無額外白名單
 [extend]
 useDefault = true
-
-[allowlist]
-description = "raw/ 第三方原始素材，排除 secret 掃描"
-paths = [
-  '''^raw/''',
-]
