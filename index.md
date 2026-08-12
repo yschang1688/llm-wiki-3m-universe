@@ -1,6 +1,6 @@
 # 知識宇宙索引（LLM Wiki 3M Universe）
 
-> 本索引僅收錄公開展示 repo 精選的 51 篇技術條目，依主題分類；每篇皆採 v3 百科全書式骨架（Lead / Infobox / Body / Appendices）。完整索引邏輯與 lint 規則見 [`tools/lint_wiki.py`](tools/lint_wiki.py)。
+> 本索引僅收錄公開展示 repo 精選的 59 篇技術條目，依主題分類；每篇皆採 v3 百科全書式骨架（Lead / Infobox / Body / Appendices）。完整索引邏輯與 lint 規則見 [`tools/lint_wiki.py`](tools/lint_wiki.py)。
 
 ## Transformer 與注意力機制（11）
 - [[Transformer架構]]
